@@ -269,7 +269,7 @@ class InfectionTests(unittest.TestCase):
         h = User('h')
         i = User('i')
         j = User('j')
-
+        k = User('k')
 
 def main():
     unittest.main()
