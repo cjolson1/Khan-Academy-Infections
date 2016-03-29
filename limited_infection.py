@@ -30,3 +30,5 @@ def limited_infection(graph, victim, new_version, preference, number_of_users):
         for item in result:
             if item.get_username() == user.get_username() and user.get_version() != new_version:
                 user.update_version(new_version)
+        if user.get_version() == new_version:
+            print user.get_username(), "has been infected."

@@ -8,7 +8,7 @@ continues the same process for each parent/child.
 from infect import infect
 
 
-def total_infection(victim, new_version):
+def total_infection(graph, victim, new_version):
     """
     :param victim: Who will be infected first. Type must be a User.
     :param new_version: The new version to give to those infected (can be any type).
@@ -23,3 +23,7 @@ def total_infection(victim, new_version):
     # Infect all the people linked to the victim.
     for person in all:
         infect(person, 1)
+
+    for user in graph:
+        if user.get_version() == new_version:
+            print user.get_username(), "has been infected."

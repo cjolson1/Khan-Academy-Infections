@@ -51,7 +51,7 @@ def visualize(users, infect_version):
         nodelist=infected,
         node_shape='s',
         node_color='r',
-        node_size=500,
+        node_size=1000,
         alpha=1.0
     )
 
@@ -61,7 +61,7 @@ def visualize(users, infect_version):
         nodelist=not_infected,
         node_shape='s',
         node_color='b',
-        node_size=500,
+        node_size=1000,
         alpha=1.0
     )
 
