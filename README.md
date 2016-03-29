@@ -14,11 +14,30 @@ To accomplish these infections, we have two functions at our disposal, `total_in
 
 The `User` object has four attributes, `parents`, `children`, `version`, and `username`. The `parents` and `children` attributes are arrays that hold other `User` objects that correspond to the user's coaches and students, respectively. The `version` is an attribute of any primitive type and corresonds to the version of the website the `User` is seeing. The `username` is the only input required when creating a `User`. We assume that we have a mechanism in place to prevent multiple occurences of a `username` to occur. That being said, in order to link one `User` to another, we must either `coach` or `decoach` them with another `User`.
 
+There are a variety of getters and setters for the `User`, and they are as follows:
+ - `update_version(new_version)`
+ - `update_username(new_username)`
+ - `add_child(child)`
+ - `add_parent(parent)`
+ - `remove_parent(parent)`
+ - `remove_student(student)`
+ - `get_parents()`
+ - `get_children()`
+ - `get_version()`
+ - `get_username()`
+ - `reset()`
+
+Furthermore, I have created two methods to simplify the coach and uncoaching process.
+
 #### **`coach`**
 
-The 
+The `coach` method takes two `User` inputs, the `coach` and the `student`, and facilitates the `coach` coaching the `student`.
 
+#### **`decoach`**
 
+The `decoach` method takes two `User` inputs, the `coach` and the `student`, and facilitates the removal of the coach-student relationship between the two.
+
+The `User`, along with the `coach` and `decoach` functionality provide a framework for us to create a userbase and link them.
 
 
 ## **`total_infection`**
@@ -28,7 +47,9 @@ This function takes two inputs: a `victim` and a `new_version`. The `victim` par
 The functionality of `total_infection` is simple. It infects all the coaches and students of the `victim` and repeats the process for continually for any individual connected directly or indirectly to the `victim`.
 
 
+## **`limited_infection`**
 
+The `limited_infection` function takes five inputs, and is much more complex than the aforementioned `total_infection`.
 Total Infection
 
 When rolling out big new features, we like to enable them slowly, starting with just the KA team, then a handful of users, then some more users, and so on, until we’ve ramped up to 100%. This insulates the majority of users from bad bugs that crop up early in the life of a feature.
