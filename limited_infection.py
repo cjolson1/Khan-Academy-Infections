@@ -26,9 +26,7 @@ def limited_infection(graph, victim, new_version, preference, number_of_users):
 
     # Because we used deepcopy to preserve the integrity of our data structure in bfs, we must update the users
     # supplied to us in the graph because those are the original users that we want to infect.
-    count = 0
     for user in graph:
         for item in result:
             if item.get_username() == user.get_username() and user.get_version() != new_version:
-                count += 1
                 user.update_version(new_version)
