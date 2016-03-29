@@ -4,6 +4,7 @@
 
 ## **Introduction**
 
+This Infections Project is written in and for Python 2.7.
 
 This project allows users to experiment with infections; when rolling out big new features, we like to enable them slowly, starting with just the KA team, then a handful of users, then some more users, and so on, until we’ve ramped up to 100%. This insulates the majority of users from bad bugs that crop up early in the life of a feature.
 
