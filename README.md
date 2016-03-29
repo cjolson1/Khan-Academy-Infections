@@ -92,15 +92,19 @@ Begin by importing all the aforementioned methods which can be accessed simply t
 
 The first step in any infection is to create the users. Since we only need to initialize users with their usernames we can create `User` objects quite simply. Be sure to not name users the same name. After initializing all the users, it is convienient to collect them all into an array for future use.
 
-`user1 = User('User 1')`
-`user2 = User('User 2')`
-`user3 = User('User 3')`
-`users = [user1, user2, user3]`
+```
+user1 = User('User 1')
+user2 = User('User 2')
+user3 = User('User 3')
+users = [user1, user2, user3]
+```
 
 In order to link the users together, we can utilize the `coach` functionality:
 
-`coach(user1, user2)`
-`coach(user1, user3)`
+```
+coach(user1, user2)
+coach(user1, user3)
+```
 
 This allows `user1` to coach `user2` and `user3`. 
 
