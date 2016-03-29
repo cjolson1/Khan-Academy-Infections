@@ -55,9 +55,9 @@ The `User`, along with the `coach` and `decoach` functionality provide a framewo
 ### **`total_infection`**
 
 
-This function takes two inputs: a `victim` and a `new_version`. The `victim` parameter must be a `User`, and will effectively be the 'patient zero' for the infections that will take place. The `new_version` can be of any type; it simply corresponds to a version of the website that will be seen by the users infected. 
+This function takes three inputs: a `graph`, a `victim`, and a `new_version`. The `graph` is simply an array of all the users that are on the platform. The `victim` parameter must be a `User`, and will effectively be the 'patient zero' for the infections that will take place. The `new_version` can be of any type; it simply corresponds to a version of the website that will be seen by the users infected. 
 
-The functionality of `total_infection` is simple. It infects all the coaches and students of the `victim` and repeats the process recursively for any individual connected directly or indirectly to the `victim`.
+The functionality of `total_infection` is simple. It infects all the coaches and students of the `victim` and repeats the process recursively for any individual connected directly or indirectly to the `victim`. After completing this process, it prints out which users have been infected.
 
 
 ### **`limited_infection`**
@@ -69,7 +69,7 @@ One parameter is the `graph`, which is simply an array of all the users in quest
 
 One key aspect of `limited_infection` is the idea of `preference`; it allows for us give direction to our infection and drive it from patient zero's coaches or students. The `preference`s we can choose from are the Strings `"child"` or `"parent"`, which tells the program to explore patient zero's children or parents, respectively. The final parameter is the `number_of_users`, which is an integer input that gives the program the upper bound on the number of users it can infect.
 
-The functionality of `limited_infection` follows the direction given by the `preference`. It attempts to iteratively infect all the users in the specified direction, and if it can, will try to infect all the newly-infected users' users in the specified direction, etc. until it reaches a point where the number of users queued to be infected would put the number of infected users over the upper-bound given by `number_of_users`. In which case, the program iteratively seeks to fill the remaining infections exactly amongst the users' relevant people, and if it cannot, it will not.
+The functionality of `limited_infection` follows the direction given by the `preference`. It attempts to iteratively infect all the users in the specified direction, and if it can, will try to infect all the newly-infected users' users in the specified direction, etc. until it reaches a point where the number of users queued to be infected would put the number of infected users over the upper-bound given by `number_of_users`. In which case, the program iteratively seeks to fill the remaining infections exactly amongst the users' relevant people, and if it cannot, it will not. After completing this process, it prints out which users have been infected.
 
 
 ### **`visualize`**
@@ -83,19 +83,53 @@ The `visualize` function returns a graph detailing the infection's spread throug
 
 Using the Infection Project requires first initializing the users that are on the platform, and infecting them in the desired way with a unique version. If desired, we can visualize the infections by running `visualize` and checking for the unique version we infected the users with.
 
-In order to convey the usage of the Infection 
+In order to convey the usage of the Infection Project, I will walk you through a simple example of its usage.
 
-Begin by importing the `User` class and `coach` and `decoach` functions.
+Begin by importing all the aforementioned methods which can be accessed simply through the line:
 
-`from user import *`
+`from infections import *`
 
-Since we only need to initialize users with their usernames we can create `User` objects quite simply. Be sure to not name users the same name.
+The first step in any infection is to create the users. Since we only need to initialize users with their usernames we can create `User` objects quite simply. Be sure to not name users the same name. After initializing all the users, it is convienient to collect them all into an array for future use.
 
 `user1 = User('User 1')`
 `user2 = User('User 2')`
+`user3 = User('User 3')`
+`users = [user1, user2, user3]`
 
 In order to link the users together, we can utilize the `coach` functionality:
 
 `coach(user1, user2)`
+`coach(user1, user3)`
 
-This 
+This allows `user1` to coach `user2` and `user3`. 
+
+If we wanted to run a `total_infection` on these users starting from `user1` with the `new_version` being 1, we would simply call the following command:
+
+`total_infection(users, user1, 1)`
+
+This console would print the following statements:
+
+```
+User 1 has been infected.
+User 2 has been infected.
+User 3 has been infected.
+```
+
+If we want to take this infection procedure a step further, we could visualize the infection by calling the following command immediately following the `total_infection` call:
+
+`visualize(users, 1)`
+
+This command would return the following graph:
+
+
+Instead, if we wanted to run a `limited_infection` on 2 users starting from `user1` in the `"child"` direction with the `new_version` being 1, we would call the following command:
+
+`limited_infection(users, user1, 1, "child", 2)`
+
+which would yield the following statements in the console:
+
+```
+User 1 has been infected.
+```
+
+Notice how only one `User` was infected despite the input being two because it is impossible to distribute the infections evenly among the children of `user1`.
