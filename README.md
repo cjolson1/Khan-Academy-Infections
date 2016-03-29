@@ -121,6 +121,7 @@ If we want to take this infection procedure a step further, we could visualize t
 
 This command would return the following graph:
 
+![alt tag](https://github.com/cjolson1/Khan-Academy-Infections/blob/master/total_infection_visualization.png)
 
 Instead, if we wanted to run a `limited_infection` on 2 users starting from `user1` in the `"child"` direction with the `new_version` being 1, we would call the following command:
 
@@ -132,4 +133,14 @@ which would yield the following statements in the console:
 User 1 has been infected.
 ```
 
+If we want to visualize the `limited_infection`, we can by calling the following command immediately following the `limited_infection` call:
+
+`visualize(users, 1)`
+
+This command would return the following graph:
+
+![alt tag](https://github.com/cjolson1/Khan-Academy-Infections/blob/master/limited_infection_visualization.png)
+
 Notice how only one `User` was infected despite the input being two because it is impossible to distribute the infections evenly among the children of `user1`.
+
+These methods are simple and scalable and can be used in increasingly complex fashions, feel free to experiment with them after downloading the files!
