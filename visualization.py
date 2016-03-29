@@ -6,8 +6,7 @@ This file allows us to visualize infections of Users. It opens a new window with
 import networkx as nx
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-from user import *
-from limited_infection import limited_infection
+
 
 def visualize(users, infect_version):
     """
@@ -114,19 +113,3 @@ def visualize(users, infect_version):
 
     # Graph the graph
     plt.show()
-a = User('a')
-b = User('b')
-c = User('c')
-d = User('d')
-e = User('e')
-f = User('f')
-g = User('g')
-coach(a, b)
-coach(a, c)
-coach(b, d)
-coach(b, e)
-coach(c, f)
-coach(c, g)
-users = [a, b, c, d, e, f, g]
-limited_infection([a, b, c, d, e, f, g], c, 1, 'child', 3)
-visualize(users, 1)

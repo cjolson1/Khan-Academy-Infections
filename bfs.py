@@ -10,6 +10,7 @@ solutions are possible, the program will only return one of the possible configu
 
 from copy import deepcopy
 from itertools import permutations
+from random import choice
 
 
 def bfs(victim, preference, goal):
@@ -133,9 +134,9 @@ def bfs(victim, preference, goal):
     for j in indices:
         most_infections.append(final[j])
 
-    # If their are multiple options, we default to choosing the 0th one. We then format the return as a
+    # If their are multiple options, we default to choosing a random one. We then format the return as a
     # set of the Users to be updated.
-    selection = most_infections[0]
+    selection = choice(most_infections)
     to_update = set()
     for level in selection.values():
         for item in level:
