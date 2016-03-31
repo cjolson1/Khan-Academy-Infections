@@ -88,7 +88,9 @@ In order to convey the usage of the Infection Project, I will walk you through a
 
 Begin by importing all the aforementioned methods which can be accessed simply through the line:
 
-`from infections import *`
+```
+from infections import *
+```
 
 The first step in any infection is to create the users. Since we only need to initialize users with their usernames we can create `User` objects quite simply. Be sure to not name users the same name. After initializing all the users, it is convienient to collect them all into an array for future use.
 
@@ -110,7 +112,9 @@ This allows `user1` to coach `user2` and `user3`.
 
 If we wanted to run a `total_infection` on these users starting from `user1` with the `new_version` being 1, we would simply call the following command:
 
-`total_infection(users, user1, 1)`
+```
+total_infection(users, user1, 1)
+```
 
 This console would print the following statements:
 
@@ -122,7 +126,9 @@ User 3 has been infected.
 
 If we want to take this infection procedure a step further, we could visualize the infection by calling the following command immediately following the `total_infection` call:
 
-`visualize(users, 1)`
+```
+visualize(users, 1)
+```
 
 This command would return the following graph:
 
@@ -130,7 +136,9 @@ This command would return the following graph:
 
 Instead, if we wanted to run a `limited_infection` on 2 users starting from `user1` in the `"child"` direction with the `new_version` being 1, we would call the following command:
 
-`limited_infection(users, user1, 1, "child", 2)`
+```
+limited_infection(users, user1, 1, "child", 2)
+```
 
 which would yield the following statements in the console:
 
@@ -140,7 +148,9 @@ User 1 has been infected.
 
 If we want to visualize the `limited_infection`, we can by calling the following command immediately following the `limited_infection` call:
 
-`visualize(users, 1)`
+```
+visualize(users, 1)
+```
 
 This command would return the following graph:
 
