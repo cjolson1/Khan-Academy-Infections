@@ -13,7 +13,7 @@ class InfectionTests(unittest.TestCase):
         a = User('a')
         b = User('b')
         coach(a, b)
-        total_infection(a, 1)
+        total_infection([a,b], a, 1)
         self.failUnless(a.get_version() == 1 and b.get_version() == 1)
 
     def testTwo(self):
@@ -34,7 +34,7 @@ class InfectionTests(unittest.TestCase):
         coach(c, f)
         coach(c, g)
         users = [a, b, c, d, e, f, g]
-        total_infection(a, 1)
+        total_infection(users, a, 1)
         correct = True
         for user in users:
             if user.get_version() != 1:
@@ -59,7 +59,7 @@ class InfectionTests(unittest.TestCase):
         coach(c, f)
         coach(c, g)
         users = [a, b, c, d, e, f, g]
-        total_infection(g, 1)
+        total_infection(users, g, 1)
         correct = True
         for user in users:
             if user.get_version() != 1:
@@ -92,7 +92,7 @@ class InfectionTests(unittest.TestCase):
         coach(h, i)
         coach(b, j)
         coach(d, j)
-        total_infection(a, 1)
+        total_infection([a,b,c,d,e,f,g,h,i,j], a, 1)
         correct = True
         for user in [a,b,c,d,g,h,i,j]:
             if user.get_version() != 1:
@@ -155,7 +155,7 @@ class InfectionTests(unittest.TestCase):
         coach(c, f)
         coach(c, g)
         users = [a, b, c, d, e, f, g]
-        limited_infection([a, b, c, d, e, f, g], a, 1, 'child', 5)
+        limited_infection(users, a, 1, 'child', 5)
         count = 0
         for user in users:
             if user.get_version() == 1:
@@ -163,7 +163,7 @@ class InfectionTests(unittest.TestCase):
         self.failUnless(
                         count == 5 and
                         e.get_version() == 1 == d.get_version() and f.get_version() is g.get_version() is None or
-                        f.get_version() == 1 == g.get_version() and e.get_version() is g.get_version() is None
+                        f.get_version() == 1 == g.get_version() and e.get_version() is d.get_version() is None
                         )
 
     def testEight(self):
@@ -184,7 +184,7 @@ class InfectionTests(unittest.TestCase):
         coach(c, f)
         coach(c, g)
         users = [a, b, c, d, e, f, g]
-        limited_infection([a, b, c, d, e, f, g], f, 1, 'parent', maxint)
+        limited_infection(users, f, 1, 'parent', maxint)
         count = 0
         for user in users:
             if user.get_version() == 1:
@@ -254,6 +254,31 @@ class InfectionTests(unittest.TestCase):
         h = User('h')
         i = User('i')
         j = User('j')
+        coach(a, b)
+        coach(b, c)
+        coach(c, a)
+        coach(a, d)
+        coach(d, e)
+        coach(d, f)
+        coach(e, b)
+        coach(e, g)
+        coach(g, b)
+        coach(h, i)
+        coach(i, j)
+        coach(j, e)
+        users=[a,b,c,d,e,f,g,h,i,j]
+        limited_infection(users, e, 1, 'child', 6)
+        count = 0
+        for user in users:
+            if user.get_version() == 1:
+                count += 1
+        self.failUnless(
+                       count == 6 and
+                       a.get_version() == b.get_version() == c.get_version() == d.get_version() ==
+                       e.get_version() == g.get_version() == 1
+        )
+
+
 
     def testTwelve(self):
         """
@@ -270,6 +295,30 @@ class InfectionTests(unittest.TestCase):
         i = User('i')
         j = User('j')
         k = User('k')
+        users = [a,b,c,d,e,f,g,h,i,j,k]
+        coach(a, b)
+        coach(b, c)
+        coach(c, a)
+        coach(a, d)
+        coach(d, e)
+        coach(d, f)
+        coach(e, b)
+        coach(e, g)
+        coach(g, b)
+        coach(h, i)
+        coach(i, j)
+        coach(j, e)
+        coach(c, k)
+        limited_infection(users, b, 1, 'parent', maxint)
+        count = 0
+        for user in users:
+            if user.get_version() != 1:
+                count += 1
+        self.failUnless(
+                       count == 2 and
+                       f.get_version() is k.get_version() is None
+        )
+
 
 def main():
     unittest.main()
